@@ -136,52 +136,44 @@ class _MyHomePageState extends State<MyHomePage> {
                     ElevatedButton(
                         onPressed: () {
                           if (dicenumber1 > dicenumber2) {
-                            var snackBar = SnackBar(
-                              content: const Text(
+                            var snackBar = const SnackBar(
+                              duration:  Duration(milliseconds: 500),
+                              content:  Text(
                                 "Player 1 win!",
                                 style: TextStyle(
                                     fontFamily: "EduSA",
                                     fontWeight: FontWeight.w500,
                                     fontSize: 30,
                                     color: Colors.greenAccent),
-                              ),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {},
-                              ),
+                              )
                             );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                           } else if (dicenumber1 == dicenumber2) {
-                            var snackBar = SnackBar(
-                              content: const Text(
+                            var snackBar =  const SnackBar(
+                              duration:  Duration(milliseconds: 500),
+                              content:   Text(
                                 "Draw",
                                 style: TextStyle(
                                   fontFamily: "EduSA",
                                   fontWeight: FontWeight.w500,
                                   fontSize: 30,
                                 ),
-                              ),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {},
+                                
                               ),
                             );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                           } else {
-                            var snackBar = SnackBar(
-                              content: const Text(
+                            var snackBar = const SnackBar(
+                              duration:  Duration(milliseconds: 500),
+                              content:  Text(
                                 "Player 2 win!",
                                 style: TextStyle(
                                     fontFamily: "EduSA",
                                     fontWeight: FontWeight.w500,
                                     fontSize: 30,
                                     color: Colors.greenAccent),
-                              ),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {},
                               ),
                             );
                             ScaffoldMessenger.of(context)
