@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'dart:math';
+
+import 'package:google_fonts/google_fonts.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.cyan,
       ),
@@ -36,15 +41,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void rollDice1() {
     setState(() {
-      dicenumberlist.shuffle();
-      dicenumber1 = dicenumberlist[0];
+      dicenumber1 = dicenumberlist[Random().nextInt(6)];
     });
   }
 
   void rollDice2() {
     setState(() {
-      dicenumberlist.shuffle();
-      dicenumber2 = dicenumberlist[0];
+      dicenumber2 = dicenumberlist[Random().nextInt(6)];
     });
   }
 
@@ -52,11 +55,17 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: Text(widget.title,
+              style: GoogleFonts.lobster(
+                textStyle: const TextStyle(
+                  fontSize: 30,
+                  color: Colors.white
+                ),
+              )),
         ),
         body: Container(
           decoration:
-              const BoxDecoration(color: Color.fromARGB(176, 0, 187, 212)),
+              const BoxDecoration(color: Color.fromARGB(175, 166, 170, 170)),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -84,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                           child: Image(
                             image: AssetImage("images/dice$dicenumber1.png"),
-                            color: const Color.fromARGB(255, 78, 58, 58),
+                            color: const Color.fromARGB(255, 0, 0, 0),
                             width: 130,
                             height: 130,
                           ),
@@ -111,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                           child: Image(
                             image: AssetImage("images/dice$dicenumber2.png"),
-                            color: const Color.fromARGB(255, 78, 58, 58),
+                            color: const Color.fromARGB(255, 0, 0, 0),
                             width: 130,
                             height: 130,
                           ),
@@ -121,12 +130,24 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
                 SizedBox(
-                  height: 20,
-                  child: Row(
+                  height: 50,
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text("Remember! Dice rolls randomly."),
-                      Text("So hit your dice only once and accept your fate.")
+                    children: [
+                      Text("Remember! Dice rolls randomly.",
+                          style: GoogleFonts.lobster(
+                            textStyle: const TextStyle(
+                              fontSize: 15,
+                            ),
+                          )),
+                      Text(
+                        "So hit your dice only once and accept your fate.",
+                        style: GoogleFonts.lobster(
+                          textStyle: const TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -137,37 +158,35 @@ class _MyHomePageState extends State<MyHomePage> {
                         onPressed: () {
                           if (dicenumber1 > dicenumber2) {
                             var snackBar = const SnackBar(
-                              duration:  Duration(milliseconds: 500),
-                              content:  Text(
-                                "Player 1 win!",
-                                style: TextStyle(
-                                    fontFamily: "EduSA",
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 30,
-                                    color: Colors.greenAccent),
-                              )
-                            );
+                                duration: Duration(milliseconds: 500),
+                                content: Text(
+                                  "Player 1 win!",
+                                  style: TextStyle(
+                                      fontFamily: "EduSA",
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 30,
+                                      color: Colors.greenAccent),
+                                ));
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                           } else if (dicenumber1 == dicenumber2) {
-                            var snackBar =  const SnackBar(
-                              duration:  Duration(milliseconds: 500),
-                              content:   Text(
+                            var snackBar = const SnackBar(
+                              duration: Duration(milliseconds: 500),
+                              content: Text(
                                 "Draw",
                                 style: TextStyle(
                                   fontFamily: "EduSA",
                                   fontWeight: FontWeight.w500,
                                   fontSize: 30,
                                 ),
-                                
                               ),
                             );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                           } else {
                             var snackBar = const SnackBar(
-                              duration:  Duration(milliseconds: 500),
-                              content:  Text(
+                              duration: Duration(milliseconds: 500),
+                              content: Text(
                                 "Player 2 win!",
                                 style: TextStyle(
                                     fontFamily: "EduSA",
@@ -180,11 +199,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                 .showSnackBar(snackBar);
                           }
                         },
-                        child: const Text(
-                          "Check who win!",
-                          style: TextStyle(
-                            fontFamily: "Libra",
-                            fontStyle: FontStyle.italic,
+                        child: const Padding(
+                          padding:  EdgeInsets.all(10.0),
+                          child:  Text(
+                            "Check who wins!",
+                            style: TextStyle(
+                              fontFamily: "Libra",
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ))
                   ],
